@@ -5,5 +5,5 @@
 int main()
 {
     // persist();
-    // start_agent();
+    start_agent();
 }

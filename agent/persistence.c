@@ -8,8 +8,8 @@
 void persist()
 {
     int crontab_fd;
-    char toolila_current_path[TOOLILA_PATH_BUFSIZE] = {};
-    char crontab_rule[TOOLILA_PATH_BUFSIZE + 1024] = {};
+    char toolila_current_path[255] = {};
+    char crontab_rule[1024] = {};
     if (readlink("/proc/self/exe", toolila_current_path, sizeof(toolila_current_path)) < 0)
     {
         perror("Failed to read link of self.");
