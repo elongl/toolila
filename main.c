@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "agent.h"
+#include "persistence.h"
 
 int main()
 {
-    start_agent();
+    // persist();
+    // start_agent();
 }
