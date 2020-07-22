@@ -1,9 +1,7 @@
 #include <stdio.h>
-#include "shell.h"
+#include "agent.h"
 
 int main()
 {
-    char out[SHELL_BUFSIZE];
-    shell("ls -lah", out);
-    printf("%s", out);
+    start_agent();
 }

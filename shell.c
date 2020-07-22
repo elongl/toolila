@@ -2,24 +2,21 @@
 #include <stdlib.h>
 #include "shell.h"
 
+#define CMD
+
 void shell(char *cmd, char *output)
 {
-
-    FILE *fp;
-    char path[SHELL_BUFSIZE];
-
-    fp = popen(cmd, "r");
+    printf("Running a shell command: %s\n", cmd);
+    FILE *fp = popen(cmd, "r");
     if (fp == NULL)
     {
-        printf("Failed to run command\n");
-        exit(1);
+        printf("Failed to run command.");
+        exit(EXIT_FAILURE);
     }
-
-    /* Read the output a line at a time - output it. */
-    while (fread(output, sizeof(path), 1, fp) != 0)
+    if (fread(output, SHELL_OUTPUT_BUFSIZE, 1, fp) < 0)
     {
-        printf("%s", path);
+        perror("Failed to read from socket.");
+        exit(EXIT_FAILURE);
     }
-
     pclose(fp);
 }
