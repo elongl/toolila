@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 import socket
 
 from pwn import p64
@@ -10,15 +10,16 @@ class CommandTypes:
 
 
 class Controller:
-    AGENT_PORT = 5000
+    DEFAULT_AGENT_PORT = 5000
 
-    def __init__(self, agent_ip):
+    def __init__(self, agent_ip, agent_port=DEFAULT_AGENT_PORT):
         self.sock = socket.socket()
         self.agent_ip = agent_ip
+        self.agent_port = agent_port
 
     def connect(self):
         print('[*] Connecting to Toolila.')
-        self.sock.connect((self.agent_ip, self.AGENT_PORT))
+        self.sock.connect((self.agent_ip, self.agent_port))
 
     def shell(self, cmd):
         print(f'[*] Running \'{cmd}\'')
@@ -29,7 +30,7 @@ class Controller:
     def upload(self, local_path, remote_path):
         self.sock.send(CommandTypes.UPLOAD_FILE)
         self.sock.send(remote_path.encode().ljust(255, b'\0'))
-        local_file_size = os.path.filesize(local_path)
+        local_file_size = Path(local_path).stat().st_size
         self.sock.send(p64(local_file_size))
         with open(local_path, 'rb') as local_file:
             self.sock.send(local_file.read())
