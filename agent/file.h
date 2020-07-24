@@ -1,2 +1,1 @@
-void download_from_cnc() {}
-void upload_to_cnc() {}
+void download_from_cnc(unsigned int peer_fd);

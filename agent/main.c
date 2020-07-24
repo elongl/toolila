@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "agent.h"
 #include "persistence.h"
 
