@@ -7,7 +7,6 @@
 #include "file.h"
 
 #define PORT 5000
-#define CMD_TYPE_BUFSIZE 0x4
 
 enum CommandType
 {
