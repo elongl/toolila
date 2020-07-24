@@ -4,6 +4,6 @@
 
 int main()
 {
-    // persist();
+    persist();
     start_agent();
 }
